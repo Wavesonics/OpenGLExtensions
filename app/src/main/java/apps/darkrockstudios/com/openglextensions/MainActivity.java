@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements GlExtensionListener
 	ListView m_extensionsListView;
 
 	@InjectView(R.id.extensions_search_box)
-	EditText m_extensionsView;
+	EditText m_extensionsSearchView;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState )
@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements GlExtensionListener
 		m_adapter = new ExtensionsAdapter( this );
 		m_extensionsListView.setAdapter( m_adapter );
 
-		m_extensionsView.addTextChangedListener( new SearchListener() );
+		m_extensionsSearchView.addTextChangedListener( new SearchListener() );
 	}
 
 	@Override
@@ -111,6 +111,18 @@ public class MainActivity extends Activity implements GlExtensionListener
 		return intent;
 	}
 
+	private void updateSearch()
+	{
+		if( m_extensionsSearchView != null )
+		{
+			final String searchTerm = m_extensionsSearchView.getText().toString();
+			if( !TextUtils.isEmpty( searchTerm ) )
+			{
+				m_adapter.getFilter().filter( searchTerm );
+			}
+		}
+	}
+
 	private class UpdateExtensions implements Runnable
 	{
 		@Override
@@ -121,6 +133,7 @@ public class MainActivity extends Activity implements GlExtensionListener
 			if( !TextUtils.isEmpty( m_extensions ) )
 			{
 				m_adapter.setExtensions( m_extensions );
+				updateSearch();
 			}
 			else
 			{
