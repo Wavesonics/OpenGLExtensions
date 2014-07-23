@@ -11,19 +11,21 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class GLRenderer implements GLSurfaceView.Renderer
 {
-	private final GlExtensionListener m_listener;
+	private final GlInfoListener m_listener;
 
-	public GLRenderer( GlExtensionListener listener )
+	public GLRenderer( GlInfoListener listener )
 	{
 		m_listener = listener;
 	}
 
-	public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+	public void onSurfaceCreated( GL10 unused, EGLConfig config )
+	{
 		// Set the background frame color
 		GLES20.glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 	}
 
-	public void onDrawFrame(GL10 unused) {
+	public void onDrawFrame( GL10 unused )
+	{
 		// Redraw background color
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 	}
@@ -31,8 +33,8 @@ public class GLRenderer implements GLSurfaceView.Renderer
 	@Override
 	public void onSurfaceCreated( final GL10 gl10, final javax.microedition.khronos.egl.EGLConfig eglConfig )
 	{
-		String extensions = gl10.glGetString( GL10.GL_EXTENSIONS );
-		m_listener.gotGlExtensions( extensions );
+		OpenGLInfo glInfo = new OpenGLInfo( gl10 );
+		m_listener.gotGlExtensions( glInfo );
 	}
 
 	public void onSurfaceChanged(GL10 unused, int width, int height) {

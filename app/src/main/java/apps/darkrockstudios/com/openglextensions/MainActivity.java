@@ -17,10 +17,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class MainActivity extends Activity implements GlExtensionListener
+public class MainActivity extends Activity implements GlInfoListener
 {
 	private GLRenderer          m_glRenderer;
-	private String              m_extensions;
+	private OpenGLInfo m_openGLInfo;
 	private ShareActionProvider m_shareActionProvider;
 
 	private ExtensionsAdapter m_adapter;
@@ -83,9 +83,9 @@ public class MainActivity extends Activity implements GlExtensionListener
 	}
 
 	@Override
-	public void gotGlExtensions( final String extensions )
+	public void gotGlExtensions( final OpenGLInfo openGLInfo )
 	{
-		m_extensions = extensions;
+		m_openGLInfo = openGLInfo;
 
 		setShareIntent( createShareIntent() );
 
@@ -96,11 +96,11 @@ public class MainActivity extends Activity implements GlExtensionListener
 	{
 		final Intent intent;
 
-		if( !TextUtils.isEmpty( m_extensions ) )
+		if( m_openGLInfo != null )
 		{
 			intent = new Intent();
 			intent.setAction( Intent.ACTION_SEND );
-			intent.putExtra( Intent.EXTRA_TEXT, m_extensions );
+			intent.putExtra( Intent.EXTRA_TEXT, m_openGLInfo.toString() );
 			intent.setType( "text/plain" );
 		}
 		else
@@ -130,9 +130,9 @@ public class MainActivity extends Activity implements GlExtensionListener
 		{
 			m_adapter.clear();
 
-			if( !TextUtils.isEmpty( m_extensions ) )
+			if( m_openGLInfo != null )
 			{
-				m_adapter.setExtensions( m_extensions );
+				m_adapter.setExtensions( m_openGLInfo.m_extensions );
 				updateSearch();
 			}
 			else
