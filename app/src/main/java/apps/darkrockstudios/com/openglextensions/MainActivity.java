@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements GlInfoListener
 		ButterKnife.inject( this );
 
 		m_glRenderer = new GLRenderer( this );
-
+		m_glView.setEGLConfigChooser( 8, 8, 8, 8, 16, 0 );
 		m_glView.setEGLContextClientVersion( 2 );
 		m_glView.setRenderer( m_glRenderer );
 		m_glView.setRenderMode( GLSurfaceView.RENDERMODE_WHEN_DIRTY );
