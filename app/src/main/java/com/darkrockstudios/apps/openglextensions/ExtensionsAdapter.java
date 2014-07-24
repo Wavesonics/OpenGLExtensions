@@ -1,4 +1,4 @@
-package apps.darkrockstudios.com.openglextensions;
+package com.darkrockstudios.apps.openglextensions;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

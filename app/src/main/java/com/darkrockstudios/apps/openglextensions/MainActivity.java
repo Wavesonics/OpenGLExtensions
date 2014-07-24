@@ -1,4 +1,4 @@
-package apps.darkrockstudios.com.openglextensions;
+package com.darkrockstudios.apps.openglextensions;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,7 +15,6 @@ import android.widget.ShareActionProvider;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
 
 public class MainActivity extends Activity implements GlInfoListener
 {

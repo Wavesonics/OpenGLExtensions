@@ -1,4 +1,4 @@
-package apps.darkrockstudios.com.openglextensions;
+package com.darkrockstudios.apps.openglextensions;
 
 import javax.microedition.khronos.opengles.GL10;
 

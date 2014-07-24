@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="apps.darkrockstudios.com.openglextensions" >
+          package="com.darkrockstudios.apps.openglextensions">
 
-    <uses-feature
+<uses-feature
         android:glEsVersion="0x00010000"
         android:required="true"/>
 
