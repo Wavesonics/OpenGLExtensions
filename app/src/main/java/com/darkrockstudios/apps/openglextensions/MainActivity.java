@@ -1,9 +1,11 @@
 package com.darkrockstudios.apps.openglextensions;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -11,12 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ShareActionProvider;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-public class MainActivity extends Activity implements GlInfoListener
+public class MainActivity extends ActionBarActivity implements GlInfoListener
 {
 	private GLRenderer          m_glRenderer;
 	private OpenGLInfo m_openGLInfo;
@@ -60,7 +62,7 @@ public class MainActivity extends Activity implements GlInfoListener
 		getMenuInflater().inflate( R.menu.main, menu );
 
 		m_shareItem = menu.findItem( R.id.menu_item_share );
-		m_shareActionProvider = (ShareActionProvider) m_shareItem.getActionProvider();
+		m_shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider( m_shareItem );
 
 		setShareIntent( createShareIntent() );
 
@@ -119,6 +121,15 @@ public class MainActivity extends Activity implements GlInfoListener
 			{
 				m_adapter.getFilter().filter( searchTerm );
 			}
+		}
+	}
+
+	@OnClick(R.id.clear_button)
+	public void onClearClick()
+	{
+		if( m_extensionsSearchView != null )
+		{
+			m_extensionsSearchView.setText( "" );
 		}
 	}
 
